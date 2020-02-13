@@ -3,7 +3,7 @@ import { MDBDataTable } from 'mdbreact';
 const Datatable = (props) => {
 	return (
 		<div>
-			<MDBDataTable striped bordered hover searching={false} data={props.data} />
+			<MDBDataTable striped bordered hover data= {props.data}  />
 		</div>
 	);
 };

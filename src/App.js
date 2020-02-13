@@ -1,11 +1,15 @@
-import React from 'react';
+import React,{ useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Hello from './components/Hello';
+import axios from 'axios';
+
 import Datatable from './components/Datatable';
+import Datason from './components/Datason';
+import useAxios from 'axios-hooks'
 
 
-const data = {
+const data1 = {
   columns: [
     {
       label: 'Name',
@@ -504,12 +508,52 @@ const data = {
   ]
 };
 
+
+
+
+
 function App() {
   const x =10;
+  const [data, setData] = useState({});
+  useEffect(async () => {
+    const result = await axios(
+      'http://localhost:1337/api/roles',
+    );
+    setData(result.data);
+  }, []);
+  var d=data['roles'];
+
+
+  console.log(d);
+  const data2 = {
+    columns: [
+     
+      {
+        label: 'ID',
+        field: 'id',
+        sort: 'asc',
+        width: 150
+      },
+      {
+        label: 'Name',
+        field: 'name',
+        sort: 'asc',
+        width: 150
+      },
+      {
+        label: 'Display name',
+        field: 'display_name',
+        sort: 'asc',
+        width: 150
+      }
+    ],
+    rows: d
+  };
+
   return (
     <div className="App">
-      
-      <Datatable data={data}/>
+    <Datatable data= {data2}/>
+     
     </div>
   );
 }
